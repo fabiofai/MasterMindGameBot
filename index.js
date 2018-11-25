@@ -10,28 +10,29 @@ bot.onText(/\/start/, function(msg) {
 	bot.sendMessage(chatId, resp)
 })
 
-bot.onText(/\/cal (.+)/, function(msg, match) {
-	var fromId	= msg.from.id
-	var resp	= match[1].replace(/[^-()\d/*+.]/g, '')
-	resp		= 'Result: ' + eval(resp)
-	bot.sendMessage(fromId, resp)
-})
+// bot.onText(/\/cal (.+)/, function(msg, match) {
+// 	var fromId	= msg.from.id
+// 	var resp	= match[1].replace(/[^-()\d/*+.]/g, '')
+// 	resp		= 'Result: ' + eval(resp)
+// 	bot.sendMessage(fromId, resp)
+// })
 
 bot.onText(/\/new/, function(msg, match) {
 	var fromId = msg.from.id
-	bot.sendGame(
-		fromId,
-		"New Game",
-		{
-			reply_markup: JSON.stringify({
-				inline_keyboard: [
-					[{	text: "Play",
-						callback_game: JSON.stringify({game_short_name: "New Game"})
-					}]
-				]
-			})
-		}
-	)
+	bot.sendMessage(fromId, "New?!")
+	// bot.sendGame(
+	// 	fromId,
+	// 	"New Game",
+	// 	{
+	// 		reply_markup: JSON.stringify({
+	// 			inline_keyboard: [
+	// 				[{	text: "Play",
+	// 					callback_game: JSON.stringify({game_short_name: "New Game"})
+	// 				}]
+	// 			]
+	// 		})
+	// 	}
+	// )
 })
 
 bot.on("callback_query", function(cq) {
