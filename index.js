@@ -10,9 +10,36 @@ bot.onText(/\/start/, function(msg) {
 	bot.sendMessage(chatId, resp)
 })
 
-bot.onText(/\/cal (.+)/, function (msg, match) {
+bot.onText(/\/cal (.+)/, function(msg, match) {
 	var fromId	= msg.from.id
 	var resp	= match[1].replace(/[^-()\d/*+.]/g, '')
 	resp		= 'Result: ' + eval(resp)
 	bot.sendMessage(fromId, resp)
+})
+
+bot.onText(/\/new/, function(msg, match) {
+	var fromId = msg.from.id
+	bot.sendGame(
+		fromId,
+		"New Game",
+		{
+			reply_markup: JSON.stringify({
+				inline_keyboard: [
+					[{	text: "Play",
+						callback_game: JSON.stringify({game_short_name: "New Game"})
+					}]
+				]
+			})
+		}
+	)
+})
+
+bot.on("callback_query", function(cq) {
+	if (cq.game_short_name) {
+		bot.answerCallbackQuery(cq.id, undefined, false, {url: "URL_DE_NUESTO_JUEGO"})
+	}
+})
+
+bot.on("inline_query", function(iq) {
+	bot.answerInlineQuery(iq.id, [{type: "game", id: "0", game_short_name: "Master Mind"}])
 })
