@@ -11,9 +11,25 @@ const bot 			= new Telegraf(token)
 bot.telegram.setWebhook('https://mastermindgamebot.herokuapp.com/bot' + token)
 bot.startWebhook('/bot' + token, null, PORT)
 
-bot.on('text', (ctx) => {
-	console.log(ctx.message)
-  return ctx.reply('Hello ' + `${ctx.message.from.first_name} ${ctx.message.from.last_name}`)
+bot.command('hello', (ctx) => {
+	var firstName 	= `${ctx.message.from.first_name}`
+	var lastName 	= `${ctx.message.from.last_name}`
+	if (firstName != ""
+		&& typeof firstName !== "undefined"
+		&& lastName != ""
+		&& typeof lastName !== "undefined") {
+			return ctx.reply('Hello ' + `${ctx.message.from.first_name} ${ctx.message.from.last_name}`)
+	} else if (firstName != ""
+		&& typeof firstName !== "undefined") {
+		return ctx.reply('Hello ' + `${ctx.message.from.first_name}`)
+	} else if (lastName != ""
+		&& typeof lastName !== "undefined") {
+		return ctx.reply('Hello ' + `${ctx.message.from.last_name}`)
+	} else {
+		return ctx.reply('Hello')
+	}
+
+  
 })
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
