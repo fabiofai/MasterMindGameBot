@@ -12,6 +12,7 @@ bot.telegram.setWebhook('https://mastermindgamebot.herokuapp.com/bot' + token)
 bot.startWebhook('/bot' + token, null, PORT)
 
 bot.on('text', (ctx) => {
+	console.log(ctx.message)
   return ctx.reply('Hello ' + `${ctx.message.from.username}`)
 })
 // bot.onText(/\/start/, function(msg) {
