@@ -13,7 +13,7 @@ bot.startWebhook('/bot' + token, null, PORT)
 
 bot.on('text', (ctx) => {
 	console.log(ctx.message)
-  return ctx.reply('Hello ' + `${ctx.message.from.username}`)
+  return ctx.reply('Hello ' + `${ctx.message.from.first_name} ${ctx.message.from.last_name}`)
 })
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
