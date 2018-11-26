@@ -8,9 +8,8 @@ const token			= '529343186:AAEGqz0kDM-AWrDUnGWOgXcw8w88e7Kf-DY'
 const bot 			= new Telegraf(token)
 
 
-bot.telegram.setWebhook('https://mastermindgamebot.herokuapp.com:8443/bot' + token, {})
-bot.startWebhook('/bot' + token, tlsOptions, 8443)
-bot.startWebhook('/bot' + token, null, 5000)
+bot.telegram.setWebhook('https://mastermindgamebot.herokuapp.com/bot' + token)
+bot.startWebhook('/bot' + token, null, PORT)
 
 bot.on('text', (ctx) => {
   return ctx.reply('Hello ' + `${ctx.message.from.username}`)
