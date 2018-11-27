@@ -5,6 +5,7 @@ const PORT					= process.env.PORT || 5000
 const token					= '529343186:AAEGqz0kDM-AWrDUnGWOgXcw8w88e7Kf-DY'
 const client				= require('mongodb').MongoClient
 const mongodbUri			= process.env.MONGODB_URI
+const dbName				= 'heroku_1w0b9d08'
 
 
 // var bot 			= new TelegramBot(token, {polling: true})
@@ -16,7 +17,7 @@ const inlineMessageRatingKeyboard = Markup.inlineKeyboard([
 
 client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
 	if(err) throw err;
-  	let db 			= client.db('masterMind')
+  	let db 			= client.db(dbName)
  	db.createCollection("games", function(err, res) {
     	if (err) throw err;
     	console.log("Collection created!");
@@ -71,8 +72,8 @@ bot.command('newGame', (ctx) => {
 	client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
 
   		if (err) throw err;
-  		let dbo = client.db("masterMind");
-  		dbo.collection("games")
+  		let dbo = client.db(dbName);
+  		dbo.collection('games')
   			.find({id:ctx.message.chat.id, status:'A'})
   			.toArray(function(err, result) {
     			if (err) throw err;
@@ -81,9 +82,9 @@ bot.command('newGame', (ctx) => {
     				ctx.reply('Game Already Started')
     				db.close();
     			} else {
-    				dbo.collection("customers").insertOne({id:ctx.message.chat.id, status:'A'}, function(err, res) {
+    				dbo.collection('games').insertOne({id:ctx.message.chat.id, status:'A'}, function(err, res) {
     					if (err) throw err;
-    					console.log("1 document inserted");
+    					console.log('1 document inserted');
     					db.close();
   					});
     			}
