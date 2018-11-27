@@ -46,10 +46,12 @@ bot.command('eatWhat', (ctx) => {
 bot.action('like', (ctx) => {
 	ctx.editMessageText('KFC')
 	ctx.reply('🎉 Awesome! 🎉')
+	return
 })
 bot.action('dislike', (ctx) => {
 	ctx.editMessageText('KFC')
 	ctx.reply('okey')
+	return
 })
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
