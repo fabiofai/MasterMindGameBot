@@ -17,9 +17,12 @@ const inlineMessageRatingKeyboard = Markup.inlineKeyboard([
 client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
 	if(err) throw err;
   	let db 			= client.db('masterMind')
- 	let gamesTable 	= db.collection('games');
+ 	db.createCollection("games", function(err, res) {
+    	if (err) throw err;
+    	console.log("Collection created!");
+    	client.close();
+  	})
 	console.log('Connected')
-  	client.close()
 })
 
 bot.telegram.setWebhook('https://mastermindgamebot.herokuapp.com/bot' + token)
