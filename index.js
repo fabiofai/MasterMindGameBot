@@ -3,7 +3,7 @@ const Telegraf 				= require('telegraf')
 const { Router, Markup } 	= Telegraf
 const PORT					= process.env.PORT || 5000
 const token					= '529343186:AAEGqz0kDM-AWrDUnGWOgXcw8w88e7Kf-DY'
-const mongodb				= require('mongodb')
+const client				= require('mongodb').MongoClient
 const mongodbUri			= process.env.MONGODB_URI
 
 
@@ -13,6 +13,14 @@ const inlineMessageRatingKeyboard = Markup.inlineKeyboard([
     Markup.callbackButton('👍', 'like'),
     Markup.callbackButton('👎', 'dislike')
 ]).extra()
+
+client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
+	if(err) throw err;
+  	let db 			= client.db('masterMind')
+ 	let gamesTable 	= db.collection('games');
+	console.log('Connected')
+  	client.close()
+})
 
 bot.telegram.setWebhook('https://mastermindgamebot.herokuapp.com/bot' + token)
 bot.startWebhook('/bot' + token, null, PORT)
@@ -57,13 +65,26 @@ bot.action('dislike', (ctx) => {
 })
 
 bot.command('newGame', (ctx) => {
-	mongodb.MongoClient.connect(mongodbUri, function(err, client) {
+	client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
 
-  		if(err) throw err;
-  		// let db = client.db('masterMind')
-  		// let songs = db.collection('games');
-  		console.log('Connected')
-  		client.close()
+  		if (err) throw err;
+  		let dbo = client.db("masterMind");
+  		dbo.collection("games")
+  			.find({id:ctx.message.chat.id, status:'A'})
+  			.toArray(function(err, result) {
+    			if (err) throw err;
+    			console.log(result.length);
+    			if (result.length > 0) {
+    				ctx.reply('Game Already Started')
+    				db.close();
+    			} else {
+    				dbo.collection("customers").insertOne({id:ctx.message.chat.id, status:'A'}, function(err, res) {
+    					if (err) throw err;
+    					console.log("1 document inserted");
+    					db.close();
+  					});
+    			}
+  		});
   	})
 })
 // bot.onText(/\/start/, function(msg) {
