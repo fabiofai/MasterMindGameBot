@@ -1,7 +1,8 @@
 // const TelegramBot 	= require('node-telegram-bot-api')
-const Telegraf 		= require('telegraf')
-const PORT			= process.env.PORT || 5000
-const token			= '529343186:AAEGqz0kDM-AWrDUnGWOgXcw8w88e7Kf-DY'
+const Telegraf 				= require('telegraf')
+const { Router, Markup } 	= Telegraf
+const PORT					= process.env.PORT || 5000
+const token					= '529343186:AAEGqz0kDM-AWrDUnGWOgXcw8w88e7Kf-DY'
 
 
 // var bot 			= new TelegramBot(token, {polling: true})
