@@ -79,6 +79,7 @@ bot.command('newGame', (ctx) => {
     			if (err) throw err;
     			console.log(result.length);
     			if (result.length > 0) {
+    				ctx.telegram.sendMessage(ctx.message.chat.id, 'Game Already Started')
     				ctx.reply('Game Already Started')
     				client.close();
     			} else {
@@ -90,6 +91,7 @@ bot.command('newGame', (ctx) => {
     			}
   		});
   	})
+  	return
 })
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
