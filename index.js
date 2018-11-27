@@ -6,7 +6,10 @@ const token			= '529343186:AAEGqz0kDM-AWrDUnGWOgXcw8w88e7Kf-DY'
 
 // var bot 			= new TelegramBot(token, {polling: true})
 const bot 			= new Telegraf(token, {username: 'master_mind_game_bot'})
-
+const inlineMessageRatingKeyboard = Markup.inlineKeyboard([
+    Markup.callbackButton('👍', 'like'),
+    Markup.callbackButton('👎', 'dislike')
+]).extra()
 
 bot.telegram.setWebhook('https://mastermindgamebot.herokuapp.com/bot' + token)
 bot.startWebhook('/bot' + token, null, PORT)
@@ -33,6 +36,25 @@ bot.command('pm', (ctx) => {
 	ctx.telegram.sendMessage(ctx.message.from.id, 'hello, this is pm message')
 	return
 })
+
+bot.command('eatWhat', (ctx) => {
+	ctx.reply(Extra.makeup(m => m.inlineKeyboard([
+			m.callbackButton('more than 5 people', 'm5'),
+			m.callbackButton('less than 5 people', 'l5'),
+		  ])))
+	return
+})
+
+bot.action('m5', (ctx) => {
+	ctx.sendMessage(ctx.message.chat.id, "KFC", inlineMessageRatingKeyboard)
+})
+
+bot.action('l5', (ctx) => {
+	ctx.sendMessage(ctx.message.chat.id, "KFC", inlineMessageRatingKeyboard)
+})
+
+bot.action('like', (ctx) => ctx.editMessageText('🎉 Awesome! 🎉'))
+bot.action('dislike', (ctx) => ctx.editMessageText('okey'))
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
 // 	var resp	= 'Hello'
