@@ -39,12 +39,18 @@ bot.command('pm', (ctx) => {
 })
 
 bot.command('eatWhat', (ctx) => {
-	ctx.telegram.sendMessage(ctx.message.chat.id, "KFC", inlineMessageRatingKeyboard)
+	ctx.telegram.sendMessage(ctx.message.chat.id, 'KFC', inlineMessageRatingKeyboard)
 	return
 })
 
-bot.action('like', (ctx) => ctx.reply('🎉 Awesome! 🎉'))
-bot.action('dislike', (ctx) => ctx.editMessageText('okey'))
+bot.action('like', (ctx) => {
+	ctx.editMessageText('KFC')
+	ctx.reply('🎉 Awesome! 🎉')
+})
+bot.action('dislike', (ctx) => {
+	ctx.editMessageText('KFC')
+	ctx.reply('okey')
+})
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
 // 	var resp	= 'Hello'
