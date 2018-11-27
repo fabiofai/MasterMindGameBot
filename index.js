@@ -64,7 +64,7 @@ bot.command('newGame', (ctx) => {
   		// let songs = db.collection('games');
   		console.log('Connected')
   		client.close()
-  	}
+  	})
 })
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
