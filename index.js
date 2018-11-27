@@ -57,7 +57,7 @@ bot.action('dislike', (ctx) => {
 })
 
 bot.command('newGame', (ctx) => {
-	mongodb.MongoClient.connect(uri, function(err, client) {
+	mongodb.MongoClient.connect(mongodbUri, function(err, client) {
 
   		if(err) throw err;
   		// let db = client.db('masterMind')
