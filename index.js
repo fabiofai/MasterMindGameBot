@@ -12,10 +12,10 @@ bot.telegram.setWebhook('https://mastermindgamebot.herokuapp.com/bot' + token)
 bot.startWebhook('/bot' + token, null, PORT)
 
 bot.command('hello', (ctx) => {
-	var firstName 	= `${ctx.message.from.first_name}`
-	var lastName 	= `${ctx.message.from.last_name}`
-	console.log(`${ctx.message.from.last_name}` != "")
-	console.log(typeof `${ctx.message.from.last_name}` !== "undefined")
+	var firstName 	= ctx.message.from.first_name
+	var lastName 	= ctx.message.from.last_name
+	console.log(ctx.message.from.last_name != "")
+	console.log(typeof ctx.message.from.last_name !== 'undefined')
 	if (`${ctx.message.from.first_name}` != "" && typeof `${ctx.message.from.first_name}` !== "undefined"
 		&& `${ctx.message.from.last_name}` != "" && typeof `${ctx.message.from.last_name}` !== "undefined") {
 			return ctx.reply('Hello ' + `${ctx.message.from.first_name} ${ctx.message.from.last_name}`)
