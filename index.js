@@ -19,7 +19,7 @@ bot.command('hello', (ctx) => {
 	console.log(lastName != '')
 	console.log(typeof lastName !== 'undefined')
 
-	if (firstName != '' && typeof firstMame !== 'undefined'
+	if (firstName != '' && typeof firstName !== 'undefined'
 		&& lastName != '' && typeof lastName !== 'undefined') {
 			return ctx.reply('Hello ' + `${ctx.message.from.first_name} ${ctx.message.from.last_name}`)
 	} else if (firstName != ""
