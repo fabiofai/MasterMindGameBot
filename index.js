@@ -15,25 +15,23 @@ bot.command('hello', (ctx) => {
 	var firstName 	= ctx.message.from.first_name
 	var lastName 	= ctx.message.from.last_name
 
-	console.log(lastName)
-	console.log(lastName != '')
-	console.log(typeof lastName !== 'undefined')
+	console.log(ctx.message)
 
 	if (firstName != '' && typeof firstName !== 'undefined'
 		&& lastName != '' && typeof lastName !== 'undefined') {
-			return ctx.reply('Hello ' + `${ctx.message.from.first_name} ${ctx.message.from.last_name}`)
-	} else if (firstName != ""
-		&& typeof firstName !== "undefined") {
-		return ctx.reply('Hello ' + `${ctx.message.from.first_name}`)
-	} else if (lastName != ""
-		&& typeof lastName !== "undefined") {
-		return ctx.reply('Hello ' + `${ctx.message.from.last_name}`)
+			return ctx.reply('Hello ' + firstName + lastName)
+	} else if (firstName != '' && typeof firstName !== 'undefined') {
+		return ctx.reply('Hello ' + firstName)
+	} else if (lastName != '' && typeof lastName !== 'undefined') {
+		return ctx.reply('Hello ' + lastName)
 	} else {
 		return ctx.reply('Hello')
 	}
-
-  
 })
+
+// bot.command('pm', (ctx) => {
+	
+// })
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
 // 	var resp	= 'Hello'
