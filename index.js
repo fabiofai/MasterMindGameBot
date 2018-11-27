@@ -15,6 +15,10 @@ bot.command('hello', (ctx) => {
 	var firstName 	= ctx.message.from.first_name
 	var lastName 	= ctx.message.from.last_name
 
+	console.log(lastName)
+	console.log(lastName != '')
+	console.log(typeof lastName !== 'undefined')
+
 	if (firstName != '' && typeof firstMame !== 'undefined'
 		&& lastName != '' && typeof lastName !== 'undefined') {
 			return ctx.reply('Hello ' + `${ctx.message.from.first_name} ${ctx.message.from.last_name}`)
