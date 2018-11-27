@@ -29,9 +29,10 @@ bot.command('hello', (ctx) => {
 	}
 })
 
-// bot.command('pm', (ctx) => {
-	
-// })
+bot.command('pm', (ctx) => {
+	ctx.telegram.sendMessage(ctx.message.from.id, 'hello, this is pm message')
+	return
+})
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
 // 	var resp	= 'Hello'
