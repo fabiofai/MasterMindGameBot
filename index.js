@@ -39,7 +39,7 @@ bot.command('pm', (ctx) => {
 })
 
 bot.command('eatWhat', (ctx) => {
-	ctx.reply(Extra.makeup(m => m.inlineKeyboard([
+	ctx.reply(Telegraf.Extra.makeup(m => m.inlineKeyboard([
 			m.callbackButton('more than 5 people', 'm5'),
 			m.callbackButton('less than 5 people', 'l5'),
 		  ])))
