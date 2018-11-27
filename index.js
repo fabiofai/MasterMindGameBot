@@ -80,12 +80,12 @@ bot.command('newGame', (ctx) => {
     			console.log(result.length);
     			if (result.length > 0) {
     				ctx.reply('Game Already Started')
-    				db.close();
+    				client.close();
     			} else {
     				dbo.collection('games').insertOne({id:ctx.message.chat.id, status:'A'}, function(err, res) {
     					if (err) throw err;
     					console.log('1 document inserted');
-    					db.close();
+    					client.close();
   					});
     			}
   		});
