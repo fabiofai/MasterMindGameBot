@@ -3,6 +3,8 @@ const Telegraf 				= require('telegraf')
 const { Router, Markup } 	= Telegraf
 const PORT					= process.env.PORT || 5000
 const token					= '529343186:AAEGqz0kDM-AWrDUnGWOgXcw8w88e7Kf-DY'
+const mongodb				= require('mongodb')
+const mongodbUri			= process.env.MONGODB_URI
 
 
 // var bot 			= new TelegramBot(token, {polling: true})
@@ -52,6 +54,16 @@ bot.action('dislike', (ctx) => {
 	ctx.editMessageText('KFC')
 	ctx.reply('okey')
 	return
+})
+
+bot.command('newGame', (ctx) => {
+	mongodb.MongoClient.connect(uri, function(err, client) {
+
+  		if(err) throw err;
+  		// let db = client.db('masterMind')
+  		// let songs = db.collection('games');
+  		console.log('Connected')
+  		client.close()
 })
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
