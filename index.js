@@ -14,6 +14,8 @@ bot.startWebhook('/bot' + token, null, PORT)
 bot.command('hello', (ctx) => {
 	var firstName 	= `${ctx.message.from.first_name}`
 	var lastName 	= `${ctx.message.from.last_name}`
+	console.log(firstName)
+	console.log(lastName)
 	if (firstName != ""
 		&& typeof firstName !== "undefined"
 		&& lastName != ""
