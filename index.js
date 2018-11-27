@@ -39,19 +39,8 @@ bot.command('pm', (ctx) => {
 })
 
 bot.command('eatWhat', (ctx) => {
-	ctx.reply(Telegraf.Extra.makeup(m => m.inlineKeyboard([
-			m.callbackButton('more than 5 people', 'm5'),
-			m.callbackButton('less than 5 people', 'l5'),
-		  ])))
+	ctx.sendMessage(ctx.message.chat.id, "KFC", inlineMessageRatingKeyboard)
 	return
-})
-
-bot.action('m5', (ctx) => {
-	ctx.sendMessage(ctx.message.chat.id, "KFC", inlineMessageRatingKeyboard)
-})
-
-bot.action('l5', (ctx) => {
-	ctx.sendMessage(ctx.message.chat.id, "KFC", inlineMessageRatingKeyboard)
 })
 
 bot.action('like', (ctx) => ctx.editMessageText('🎉 Awesome! 🎉'))
