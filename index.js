@@ -44,7 +44,7 @@ bot.command('eatWhat', (ctx) => {
 })
 
 bot.action('like', (ctx) => ctx.reply('🎉 Awesome! 🎉'))
-bot.action('dislike', (ctx) => ctx.reply('okey'))
+bot.action('dislike', (ctx) => ctx.editMessageText('okey'))
 // bot.onText(/\/start/, function(msg) {
 // 	var chatId	= msg.chat.id
 // 	var resp	= 'Hello'
