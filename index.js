@@ -5,7 +5,7 @@ const token			= '529343186:AAEGqz0kDM-AWrDUnGWOgXcw8w88e7Kf-DY'
 
 
 // var bot 			= new TelegramBot(token, {polling: true})
-const bot 			= new Telegraf(token)
+const bot 			= new Telegraf(token, {username: 'master_mind_game_bot'})
 
 
 bot.telegram.setWebhook('https://mastermindgamebot.herokuapp.com/bot' + token)
