@@ -18,7 +18,7 @@ const inlineMessageRatingKeyboard = Markup.inlineKeyboard([
 client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
 	if(err) throw err;
   	let db 			= client.db(dbName)
- 	db.createCollection('games', function(err, res) {
+ 	db.createCollection("games", function(err, res) {
     	if (err) throw err;
     	console.log("Collection created!");
     	client.close();
@@ -53,7 +53,6 @@ bot.command('pm', (ctx) => {
 })
 
 bot.command('eatWhat', (ctx) => {
-	console.log(ctx.message.chat.id)
 	ctx.telegram.sendMessage(ctx.message.chat.id, 'KFC', inlineMessageRatingKeyboard)
 	return
 })
@@ -70,32 +69,26 @@ bot.action('dislike', (ctx) => {
 })
 
 bot.command('newGame', (ctx) => {
-	if ('group' != ctx.message.chat.type) {
-		ctx.telegram.sendMessage(ctx.message.chat.id, 'Please add me to a group and play together')
-		return
-	}
 	client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
 
   		if (err) throw err;
-  		let dbo = client.db(dbName)
+  		let dbo = client.db(dbName);
   		dbo.collection('games')
   			.find({id:ctx.message.chat.id, status:'A'})
   			.toArray(function(err, result) {
-    			if (err) throw err
-    			console.log(result.length)
+    			if (err) throw err;
+    			console.log(result.length);
     			if (result.length > 0) {
-    				console.log('Game Already Started')
-    				console.log(ctx.message.chat.id)
-    				ctx.telegram.sendMessage(ctx.message.chat.id, 'Please add me to a group and play together')
-    				client.close()
+    				ctx.telegram.sendMessage(ctx.message.chat.id, 'Game Already Started')
+    				client.close();
     			} else {
     				dbo.collection('games').insertOne({id:ctx.message.chat.id, status:'A'}, function(err, res) {
-    					if (err) throw err
-    					console.log('1 document inserted')
-    					client.close()
-  					})
+    					if (err) throw err;
+    					console.log('1 document inserted');
+    					client.close();
+  					});
     			}
-  		})
+  		});
   	})
   	return
 })
