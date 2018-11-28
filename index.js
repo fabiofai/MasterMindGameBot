@@ -53,6 +53,7 @@ bot.command('pm', (ctx) => {
 })
 
 bot.command('eatWhat', (ctx) => {
+	console.log(ctx.message.chat.id)
 	ctx.telegram.sendMessage(ctx.message.chat.id, 'KFC', inlineMessageRatingKeyboard)
 	return
 })
