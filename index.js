@@ -70,10 +70,10 @@ bot.action('dislike', (ctx) => {
 })
 
 bot.command('newGame', (ctx) => {
-	if ('group' != ctx.message.chat.type) {
-		ctx.telegram.sendMessage(ctx.message.chat.id, 'Please add me to a group and play together')
-		return
-	}
+	// if ('group' != ctx.message.chat.type) {
+	// 	ctx.telegram.sendMessage(ctx.message.chat.id, 'Please add me to a group and play together')
+	// 	return
+	// }
 	client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
 
   		if (err) throw err;
@@ -82,10 +82,8 @@ bot.command('newGame', (ctx) => {
   			.find({id:ctx.message.chat.id, status:'A'})
   			.toArray(function(err, result) {
     			if (err) throw err
-    			console.log(result.length)
     			if (result.length > 0) {
     				console.log('Game Already Started')
-    				console.log(ctx.message.chat.id)
     				ctx.telegram.sendMessage(ctx.message.chat.id, 'Please add me to a group and play together')
     				client.close()
     				return
