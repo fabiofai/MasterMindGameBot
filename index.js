@@ -84,6 +84,7 @@ bot.command('newGame', (ctx) => {
     			console.log(result.length)
     			if (result.length > 0) {
     				console.log('Game Already Started')
+    				console.log(ctx.message.chat.id)
     				ctx.telegram.sendMessage(ctx.message.chat.id, 'Game Already Started')
     				client.close()
     			} else {
