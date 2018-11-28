@@ -75,7 +75,6 @@ bot.command('newGame', (ctx) => {
 	// 	return
 	// }
 	client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
-		ctx.telegram.sendMessage(ctx.message.chat.id, 'Test')
   		if (err) throw err;
   		let dbo = client.db(dbName)
   		dbo.collection('games')
@@ -84,13 +83,14 @@ bot.command('newGame', (ctx) => {
     			if (err) throw err
     			if (result.length > 0) {
     				console.log('Game Already Started')
-    				ctx.telegram.sendMessage(ctx.message.chat.id, 'Please add me to a group and play together')
+    				ctx.telegram.sendMessage(ctx.message.chat.id, 'Game Already Started')
     				client.close()
     				return
     			} else {
     				dbo.collection('games').insertOne({id:ctx.message.chat.id, status:'A'}, function(err, res) {
     					if (err) throw err
     					console.log('1 document inserted')
+    					ctx.telegram.sendMessage(ctx.message.chat.id, 'Game Start Started')
     					client.close()
     					return
   					})
