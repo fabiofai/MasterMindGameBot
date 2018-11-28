@@ -75,7 +75,7 @@ bot.command('newGame', (ctx) => {
 	// 	return
 	// }
 	client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
-
+		ctx.telegram.sendMessage(ctx.message.chat.id, 'Test')
   		if (err) throw err;
   		let dbo = client.db(dbName)
   		dbo.collection('games')
