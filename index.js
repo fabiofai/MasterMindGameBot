@@ -18,7 +18,7 @@ const inlineMessageRatingKeyboard = Markup.inlineKeyboard([
 client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
 	if(err) throw err;
   	let db 			= client.db(dbName)
- 	db.createCollection("games", function(err, res) {
+ 	db.createCollection('games', function(err, res) {
     	if (err) throw err;
     	console.log("Collection created!");
     	client.close();
@@ -69,6 +69,10 @@ bot.action('dislike', (ctx) => {
 })
 
 bot.command('newGame', (ctx) => {
+	if ('group' != ctx.message.chat.type) {
+		ctx.telegram.sendMessage(ctx.message.chat.id, 'Please add me to a group and play together')
+		return
+	}
 	client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
 
   		if (err) throw err;
@@ -80,7 +84,6 @@ bot.command('newGame', (ctx) => {
     			console.log(result.length);
     			if (result.length > 0) {
     				ctx.telegram.sendMessage(ctx.message.chat.id, 'Game Already Started')
-    				ctx.reply('Game Already Started')
     				client.close();
     			} else {
     				dbo.collection('games').insertOne({id:ctx.message.chat.id, status:'A'}, function(err, res) {
