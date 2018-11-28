@@ -76,23 +76,24 @@ bot.command('newGame', (ctx) => {
 	client.connect(mongodbUri, { useNewUrlParser: true }, function(err, client) {
 
   		if (err) throw err;
-  		let dbo = client.db(dbName);
+  		let dbo = client.db(dbName)
   		dbo.collection('games')
   			.find({id:ctx.message.chat.id, status:'A'})
   			.toArray(function(err, result) {
-    			if (err) throw err;
-    			console.log(result.length);
+    			if (err) throw err
+    			console.log(result.length)
     			if (result.length > 0) {
+    				console.log('Game Already Started')
     				ctx.telegram.sendMessage(ctx.message.chat.id, 'Game Already Started')
-    				client.close();
+    				client.close()
     			} else {
     				dbo.collection('games').insertOne({id:ctx.message.chat.id, status:'A'}, function(err, res) {
-    					if (err) throw err;
-    					console.log('1 document inserted');
-    					client.close();
-  					});
+    					if (err) throw err
+    					console.log('1 document inserted')
+    					client.close()
+  					})
     			}
-  		});
+  		})
   	})
   	return
 })
