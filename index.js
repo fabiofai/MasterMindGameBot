@@ -86,7 +86,7 @@ bot.command('newGame', (ctx) => {
     			if (result.length > 0) {
     				console.log('Game Already Started')
     				console.log(ctx.message.chat.id)
-    				ctx.telegram.sendMessage(ctx.message.chat.id, 'Game Already Started')
+    				ctx.telegram.sendMessage(ctx.message.chat.id, 'Please add me to a group and play together')
     				client.close()
     			} else {
     				dbo.collection('games').insertOne({id:ctx.message.chat.id, status:'A'}, function(err, res) {
